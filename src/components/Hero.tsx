@@ -52,14 +52,8 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in animation-delay-400">
             <Link 
-              to='/customizations' 
-              className='px-8 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-full hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors transform hover:scale-105 duration-300'
-            >
-              Start Designing
-            </Link>
-            <Link 
               to='/collections' 
-              className="px-8 py-3 bg-white dark:bg-gray-700 text-gray-800 dark:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors transform hover:scale-105 duration-300"
+              className='px-8 py-3 bg-blue-600 dark:bg-blue-700 text-white rounded-full hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors transform hover:scale-105 duration-300'
             >
               Browse Collection
             </Link>
