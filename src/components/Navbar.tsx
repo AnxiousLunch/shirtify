@@ -64,42 +64,42 @@ const Navbar = () => {
               </button>
               <Link to='/'>
                 <div className="ml-2 flex items-center">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                  <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
                     Shirtify
                   </span>
                 </div>
               </Link>
             </div>
 
-            {/* Search Bar */}
-            <div className="flex-1 max-w-2xl mx-8">
+            {/* Search Bar - Responsive */}
+            <div className="flex-1 min-w-0 mx-2 sm:mx-4 md:mx-8 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
               <form onSubmit={handleSearchSubmit} className="relative">
                 <input
                   type="text"
-                  placeholder="Search for custom shirts..."
-                  className="w-full px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all dark:bg-gray-800 dark:text-white"
+                  placeholder="Search..."
+                  className="w-full pl-3 pr-9 py-1.5 sm:py-2 rounded-full border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all dark:bg-gray-800 dark:text-white text-sm sm:text-base"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <button 
                   type="submit" 
-                  className="absolute right-0 top-0 h-full w-12 flex items-center justify-center text-gray-400 dark:text-gray-500"
+                  className="absolute right-0 top-0 h-full w-8 sm:w-10 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 >
-                  <Search className="h-6 w-6" />
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </form>
             </div>
 
             {/* Cart and User */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               {/* Cart */}
               <Link 
                 to="/cart" 
                 className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative"
               >
-                <ShoppingCart className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600 dark:text-gray-300" />
                 {totalCartItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-blue-600 dark:bg-blue-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-blue-600 dark:bg-blue-500 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center">
                     {totalCartItems}
                   </span>
                 )}
@@ -113,7 +113,7 @@ const Navbar = () => {
                     className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                     aria-label="Toggle user menu"
                   >
-                    <User className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+                    <User className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600 dark:text-gray-300" />
                   </button>
 
                   {isMenuOpen && (
@@ -147,7 +147,7 @@ const Navbar = () => {
               ) : (
                 <Link 
                   to="/login" 
-                  className="px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-full hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-full hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors text-sm sm:text-base"
                 >
                   Login
                 </Link>
@@ -157,86 +157,97 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        <div className="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg flex flex-col transition-colors duration-300">
-          <div className="flex items-center justify-between px-4 py-4 border-b dark:border-gray-700">
-            <span className="text-xl font-bold text-gray-800 dark:text-white">Menu</span>
+      {/* Enhanced Animated Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-2xl transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex flex-col h-full">
+          {/* Header with enhanced styling */}
+          <div className="flex items-center justify-between px-6 py-5 border-b dark:border-gray-700 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900">
+            <span className="text-xl font-bold text-gray-800 dark:text-white tracking-wide">Menu</span>
             <button
               onClick={() => setIsSidebarOpen(false)}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+              className="p-2 hover:bg-white/50 dark:hover:bg-gray-700/50 rounded-full transition-all duration-200 transform hover:scale-105 active:scale-95"
               aria-label="Close menu"
             >
               <X className="h-6 w-6 text-gray-600 dark:text-gray-300" />
             </button>
           </div>
 
-          <nav className="flex flex-col px-4 py-2 space-y-2">
+          {/* Navigation with enhanced animations */}
+          <nav className="flex flex-col px-4 py-6 space-y-1 flex-1 overflow-y-auto">
             {currentUser ? (
               <>
                 <Link 
                   to="/order-history" 
                   onClick={() => setIsSidebarOpen(false)} 
-                  className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+                  className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
                 >
-                  Order History
+                  <span className="text-sm font-medium tracking-wide">Order History</span>
+                  <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
                 </Link>
                 <Link 
                   to="/current-orders" 
                   onClick={() => setIsSidebarOpen(false)} 
-                  className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+                  className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
                 >
-                  Current Orders
+                  <span className="text-sm font-medium tracking-wide">Current Orders</span>
+                  <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
                 </Link>
                 <Link 
                   to="/wishlist" 
                   onClick={() => setIsSidebarOpen(false)} 
-                  className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+                  className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
                 >
-                  Wishlist
+                  <span className="text-sm font-medium tracking-wide">Wishlist</span>
+                  <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
                 </Link>
                 <Link 
                   to="/settings" 
                   onClick={() => setIsSidebarOpen(false)} 
-                  className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+                  className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
                 >
-                  Settings
+                  <span className="text-sm font-medium tracking-wide">Settings</span>
+                  <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
                 </Link>
                 <Link 
                   to="/profile" 
                   onClick={() => setIsSidebarOpen(false)} 
-                  className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+                  className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
                 >
-                  Profile
+                  <span className="text-sm font-medium tracking-wide">Profile</span>
+                  <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
                 </Link>
               </>
             ) : (
               <Link 
                 to="/login" 
                 onClick={() => setIsSidebarOpen(false)} 
-                className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+                className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
               >
-                Login / Register
+                <span className="text-sm font-medium tracking-wide">Login / Register</span>
+                <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
               </Link>
             )}
+            
+            {/* Divider */}
+            <div className="my-4 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+            
             <Link 
               to="/contact" 
               onClick={() => setIsSidebarOpen(false)} 
-              className="text-left w-full px-2 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition"
+              className="group flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 rounded-lg transition-all duration-200 transform hover:translate-x-1 hover:shadow-md"
             >
-              Contact Us
+              <span className="text-sm font-medium tracking-wide">Contact Us</span>
+              <div className="ml-auto w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-4 transition-all duration-300"></div>
             </Link>
           </nav>
         </div>
-      )}
+      </div>
 
-      {/* Overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      )}
+      {/* Ultra-smooth overlay */}
+      <div
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-all duration-500 z-40 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        onClick={() => setIsSidebarOpen(false)}
+      />
     </>
   );
 };
